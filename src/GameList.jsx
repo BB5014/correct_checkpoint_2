@@ -17,16 +17,17 @@ class GameList extends Component {
       });
    }
 
-   deleteChild = id => {
-      // this.setState({
-      //    gamelist: this.state.gamelist.filter(j => j !== toto)
-      // });
-      let { gamelist } = this.state;
-      gamelist.splice(id, 1);
+   deleteChild(index) {
+      const filtered = this.state.gamelist.filter((_, i) => i !== index);
       this.setState({
-         gamelist
+         gamelist: filtered
       });
-   };
+      // let { gamelist } = this.state;
+      // gamelist.splice(id, 1);
+      // this.setState({
+      //    gamelist
+      // });
+   }
 
    render() {
       return (
@@ -34,7 +35,7 @@ class GameList extends Component {
             <h1>Hello GameList</h1>
             <div>
                {this.state.gamelist.map((game, index) => {
-                  return <Game {...game} key={index} delete={this.deleteChild} />;
+                  return <Game {...game} key={index} delete={this.deleteChild.bind(this, index)} />;
                })}
             </div>
          </>
